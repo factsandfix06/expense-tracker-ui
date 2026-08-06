@@ -1,0 +1,120 @@
+<div class="expense-container">
+    <!-- Side Menu -->
+    <nav class="side-menu">
+      <ul>
+        <li [class.active]="activeMenu === 'dashboard'" (click)="setActiveMenu('dashboard');navigateToDashboard('dashboard')">
+          Dashboard
+        </li>
+        <li [class.active]="activeMenu === 'income'" (click)="setActiveMenu('income');navigateToDashboard('income')">
+          Income
+        </li>
+        <li [class.active]="activeMenu === 'expense'" (click)="setActiveMenu('expense');navigateToDashboard('expense')">
+          Expense
+        </li>
+        <li (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="header">
+          <div class="header-content">
+          <h1>Hello, {{ username }}</h1>
+          <button class="create-report-btn" (click)="openModal()">
+            <i class="bi bi-plus-circle"></i> Add Income
+          </button>
+          </div>
+          <p>Here's a summary of your financial activity for this month.</p>
+          <hr />
+        </header>
+        <div class="modal fade" id="expenseModal" tabindex="-1" aria-labelledby="expenseModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="expenseModalLabel">Add New Expense</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="expenseForm">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input id="name" type="text" class="form-control" formControlName="name">
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Amount</label>
+                  <input id="amount" type="number" class="form-control" formControlName="amount">
+                </div>
+                <div class="mb-3">
+                  <label for="category" class="form-label">Category</label>
+                  <input id="category" type="text" class="form-control" formControlName="category">
+                </div>
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea id="description" class="form-control" formControlName="description"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="date" class="form-label">Date</label>
+                  <input id="date" type="date" class="form-control" formControlName="date">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="submitIncome()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+        <table class="table">
+            <thead>
+              <tr>
+                <th>
+                  <input type="checkbox" (change)="selectAll($event)" />
+                </th>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Actions</th> 
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of items; let i = index">
+                <td>
+                  <input type="checkbox" [(ngModel)]="item.selected" />
+                </td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.amount }}</td>
+                <td>{{ item.category }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.date | date }}</td>
+                <td>
+                    <!-- <button class="edit-btn">
+                        <i class="bi bi-pencil"></i> 
+                      </button> -->
+                      <button class="delete-btn"(click)="deleteItem(item.id)">
+                        <i class="bi bi-trash"></i> 
+                      </button>                                         
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+          <div class="chart">
+            <h3>Expense Breakdown</h3>
+            <div style="display: block; width: 100%; max-width: 850px;">
+              <canvas
+                baseChart
+                [data]="chartData"
+                [labels]="chartLabels"
+                [type]="chartType"
+                [options]="chartOptions"
+              ></canvas>
+            </div>
+          </div>                                                 
+    </div>
+</div>

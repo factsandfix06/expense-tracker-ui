@@ -1,0 +1,29 @@
+<div class="login-container">
+    <div class="login-form col-md-6">
+      <div class="header">
+        <h1>Welcome back!</h1>
+        <p>Simplify your workflow and boost your productivity<br>
+          with this expense tracker.
+          Get Started for free!
+        </p>
+      </div>
+        <form (ngSubmit)="onSubmit()" #loginform="ngForm">
+          <div class="form-input">
+            <div class="input-group">
+                <input type="text" placeholder="Username" required [(ngModel)]="username" name="username"/> 
+            </div>
+            <div class="input-group">
+                <input type="text" placeholder="Password" required [(ngModel)]="password" name="password"/> 
+            </div>
+            <a href="#" class="forgot-password">Forgot Password?</a>
+          </div>           
+            <button type="submit" class="login-button">Login</button>
+        </form>
+        <p class="register">
+          <a [routerLink]="'/register'">Create an account</a>
+        </p>
+    </div>
+    <div class="login-banner col-md-6">
+          <img src="assets/rb_1038.png" alt="Illustration" class="banner-illustration" />
+    </div>
+</div>

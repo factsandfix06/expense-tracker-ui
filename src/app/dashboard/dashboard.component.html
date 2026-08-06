@@ -1,0 +1,55 @@
+<div class="dashboard-container">
+    <!-- Side Menu -->
+    <nav class="side-menu">
+      <ul>
+        <li [class.active]="activeMenu === 'dashboard'" (click)="setActiveMenu('dashboard');navigateToDashboard('dashboard')">
+          Dashboard
+        </li>
+        <li [class.active]="activeMenu === 'income'" (click)="setActiveMenu('income');navigateToDashboard('income')">
+          Income
+        </li>
+        <li [class.active]="activeMenu === 'expense'" (click)="setActiveMenu('expense');navigateToDashboard('expense')">
+          Expense
+        </li>
+        <li (click)="logout()">
+          <i class="fas fa-sign-out-alt"></i> Logout
+      </li>
+      </ul>
+    </nav>
+  
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-content">
+        <h1>Hello, {{ username }}</h1>
+        <button class="create-report-btn">Create Report</button>
+      </div>
+        <p>Here's a summary of your financial activity for this week.</p>
+        <hr />
+      </header>
+  
+      <!-- Cards Section -->
+      <section class="cards-section">       
+        <div class="card" *ngFor="let card of cards">
+          <h2>{{ card.title }}</h2>
+          <p>{{ card.value }}</p>
+        </div>
+      </section>
+  
+      <!-- Bar Graph -->
+      <section class="graph-section">
+        <h2>Your Expenses</h2>
+        <div style="display: block; width: 100%; max-width: 850px;">
+          <canvas
+            baseChart
+            [data]="chartData"
+            [labels]="chartLabels"
+            [type]="chartType"
+            [options]="chartOptions"
+          ></canvas>
+        </div>
+      </section>
+    </div>
+  </div>
+  

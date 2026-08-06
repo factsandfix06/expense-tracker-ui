@@ -1,0 +1,22 @@
+<div class="registration-container">
+    <div class="registration-form">
+        <div class="header">
+            <h1>Create New Account</h1>
+        </div>
+        <form (ngSubmit)="onSubmit()" #registerform="ngForm">
+            <div class="form-input">
+              <div class="input-group">
+                  <input type="text" placeholder="Username" required [(ngModel)]="username" name="username"/> 
+              </div>
+              <div class="input-group">
+                  <input type="text" placeholder="Password" required [(ngModel)]="password" name="password"/> 
+              </div>
+            </div>           
+              <button type="submit" class="registration-button">Register</button>
+          </form>
+    </div>
+    <div class="login-banner col-md-6">
+        <img src="assets/rb_1038.png" alt="Illustration" class="banner-illustration" />
+  </div>
+</div>
+  
