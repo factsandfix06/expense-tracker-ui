@@ -13,6 +13,17 @@ import { ChartType, ChartData} from 'chart.js';
 
 export class DashboardComponent {
 
+  // Temporary function for Git revert/reset demo
+  calculateMonthlyBudget(): number {
+    const income = this.dashboardDetails?.income ?? 0;
+    const expenses = this.dashboardDetails?.expense ?? 0;
+
+    const remainingBudget = income - expenses;
+    console.log('Monthly remaining budget:', remainingBudget);
+
+    return remainingBudget;
+  }
+
   transactions:string[]=[];
   dashboardDetails: DashboardDetailsDTO | null = null;  
   activeMenu: string = 'dashboard';
